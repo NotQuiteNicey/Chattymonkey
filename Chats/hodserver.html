@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+        <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>ChatRoom by HD</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all,follow">
+    <!-- Bootstrap CSS-->
+    <link rel="stylesheet" href="quick-website.css">
+    <!-- Font Awesone Updated Icons -->
+    <script src="https://kit.fontawesome.com/ee1bcb7865.js" crossorigin="anonymous"></script>
+    <!-- theme stylesheet-->
+    <link rel="stylesheet" href="css/style.default.css" id="theme-stylesheet">
+    <!-- Custom stylesheet - for your changes-->
+    <link rel="stylesheet" href="css/custom.css">
+    <!-- Favicon-->
+    <link rel="shortcut icon" href="img/medal.svg">
+  <style>
+    body { background-color: #e0e0e0; font-size: 1.5em; padding: 0em 0.25em; }
+    pre { color: #00093b; white-space: pre-wrap; word-wrap: break-word; text-shadow: 0 0 10px #ccc; }
+    #input { border-bottom: 1px solid #ccc; background-color: #ffffff; padding: 0.25em; outline: 0; }
+    #input::before { content: "> "; }
+  </style>
+  <script>
+    function log(message) {
+      document.getElementById("log").textContent += message + "\n";
+    }
+  </script>
+  <script src="https://chr15m.github.io/bugout/bugout.min.js" type="application/javascript"></script>
+</head>
+<body>
+<!-- navbar-->
+    <header class="header">
+        <nav class="navbar navbar-expand-lg fixed-top"><h1 class="fas fa-comment-dots text-primary"></h1> <h1 class="text-primary">&nbsp; HOD Server</h1>
+        <button type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right"><span></span><span></span><span></span></button>
+        <div id="navbarSupportedContent" class="collapse navbar-collapse">
+          <ul class="navbar-nav ml-auto align-items-start align-items-lg-center">
+          </ul>
+            &nbsp;&nbsp;&nbsp;
+            
+        </div>
+      </nav>
+    </header>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <h1 class="text-primary">HD Software Group Chat</h1>
+  <pre id="log"></pre>
+  <pre id="input" contenteditable="true"></pre>
+</body>
+<script>
+  log("# Type here to start chatting ");
+
+  var b = Bugout("hd-chat-hod");
+  b.on("seen", function(address) { log(address + " is online."); });
+  log(b.address() + " is your ID.");
+  
+  b.on("message", function(address, message) {
+    log(address + ": " + message);
+  });
+
+  document.getElementById("input").onkeydown = function(ev) {
+    if (ev.keyCode == 13) {
+      if (b.lastwirecount) {
+        b.send(ev.target.textContent);
+        ev.target.textContent = "";
+      }
+      ev.preventDefault();
+    }
+  }
+
+</script>
+</html>
